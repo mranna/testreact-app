@@ -1,15 +1,31 @@
-import react, { useEffect, useState } from 'React';
+import React, { useState, useEffect } from 'react';
 
-export default function GetData(){
+const UsingFetch = () =>{
+    const [users, setUsers] = useState([]);
+    const id = 1;
 
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(null);
-    const [error, setError] = useState(null);
+    const fetchData = () =>{
+        fetch(`https://jsonplaceholder.typicode.com/users?id=${id}`)
+            .then(response =>{
+                return response.json()
+            })
+            .then(data =>{
+                setUsers(data[0].name)
+            })
+    }
 
     useEffect(()=>{
-        fetch(`https://jsonplaceholder.typicode.com/posts`)
-        .then((response) => console.log(response));
-    }, []);
+        fetchData()
+    },[])
 
-    return <div className='App'>App</div>;
+    return <div>Name: {users}</div>
+    // return (
+    //     <div>
+    //         <button onClick={fetchData}>Fetch Data</button>
+    //         {users.map(user =>(
+    //             <p>{user.address.street}</p>
+    //         ))}
+    //     </div>
+    // )
 }
+export default UsingFetch;

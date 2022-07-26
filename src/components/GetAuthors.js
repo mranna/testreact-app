@@ -24,8 +24,6 @@ const fetchAuthors = () => {
             console.log(err);
         });
 };
-
- 
 /**
  * Function handleSearchChange gets called every time the input field changes
  * @param {*} e sets the state to the data from the input field 
@@ -43,7 +41,7 @@ const filtered = !selectedFilter
     ? authors  // empty
     : authors.filter((author) => {
         console.log(author.title.toLowerCase())
-        author.title.toLowerCase().includes(selectedFilter.toLowerCase())
+        return author.title.toLowerCase().includes(selectedFilter.toLowerCase())
     });
 /**
  * if(obj.length > 0)
